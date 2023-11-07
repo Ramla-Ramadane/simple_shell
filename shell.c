@@ -26,6 +26,7 @@ void shell(void)
 		{
 			break;
 		}
+		write(1, lineptr, strlen(lineptr));
 		leave = strcmp(lineptr, "exit\n");
 		if (leave == 0)
 		{
