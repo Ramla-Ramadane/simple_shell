@@ -2,13 +2,13 @@
 
 /**
  * shell - function that emulates the shell program
+ * @envp: points to environment variables
  * Return: nothing
  */
-void shell(void)
+void shell(char *envp[])
 {
 	int shell_mode;
 	ssize_t full_line;
-	int leave;
 	char *my_prompt = "techgirls$ ";
 	char *lineptr = NULL;
 	size_t size = 0;
@@ -27,10 +27,14 @@ void shell(void)
 			break;
 		}
 		lineptr[strlen(lineptr) - 1] = '\0';
-		write(1, lineptr, strlen(lineptr));
-		write(1, "\n", 1);
-		leave = strcmp(lineptr, "exit");
-		if (leave == 0)
+		/*write(1, lineptr, strlen(lineptr));*/
+		/*write(1, "\n", 1);*/
+		if (strcmp(lineptr, "env") == 0)
+		{
+			print_environment(envp);
+			continue;
+		}
+		if (strcmp(lineptr, "exit") == 0)
 		{
 			write(1, "Disconnected...", strlen("Disconnected..."));
 			write(1, "\n", 1);

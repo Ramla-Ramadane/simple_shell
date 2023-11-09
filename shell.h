@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void shell(void);
+#define SUCCESS 0
+#define FAILURE 1
+
+void shell(char *envp[]);
+void print_environment(char *envp[]);
 
 #endif /* SHELL_H */
