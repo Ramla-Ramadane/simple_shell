@@ -26,10 +26,14 @@ void shell(void)
 		{
 			break;
 		}
+		lineptr[strlen(lineptr) - 1] = '\0';
 		write(1, lineptr, strlen(lineptr));
-		leave = strcmp(lineptr, "exit\n");
+		write(1, "\n", 1);
+		leave = strcmp(lineptr, "exit");
 		if (leave == 0)
 		{
+			write(1, "Disconnected...", strlen("Disconnected..."));
+			write(1, "\n", 1);
 			break;
 		}
 	}
