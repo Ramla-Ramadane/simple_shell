@@ -12,6 +12,7 @@ void shell(char *envp[])
 	char *my_prompt = "techgirls$ ";
 	char *lineptr = NULL;
 	size_t size = 0;
+	char **livre;
 
 	shell_mode = isatty(STDIN_FILENO);
 
@@ -26,9 +27,8 @@ void shell(char *envp[])
 		{
 			break;
 		}
+		livre = tokenize(lineptr);
 		lineptr[strlen(lineptr) - 1] = '\0';
-		/*write(1, lineptr, strlen(lineptr));*/
-		/*write(1, "\n", 1);*/
 		if (strcmp(lineptr, "env") == 0)
 		{
 			print_environment(envp);
@@ -40,6 +40,8 @@ void shell(char *envp[])
 			write(1, "\n", 1);
 			break;
 		}
+		execute_input(livre);
+		free(livre);
 	}
 	free(lineptr);
 }
