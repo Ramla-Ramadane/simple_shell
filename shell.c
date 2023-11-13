@@ -1,13 +1,16 @@
 #include "shell.h"
 
 /**
- * shell - function that emulates the shell program
+ * main - function that emulates the shell program
  * @envp: points to environment variables
- * Return: nothing
+ * @argc: count arguments
+ * @argv: points to cl argument
+ * Return: 0 if success
  */
-void shell(char *envp[])
+int main(int argc __attribute__ ((unused)),
+	       char *argv[] __attribute__ ((unused)), char *envp[])
 {
-	int shell_mode;
+	int shell_mode, i;
 	ssize_t full_line;
 	char *my_prompt = "techgirls$ ";
 	char *lineptr = NULL;
@@ -27,7 +30,6 @@ void shell(char *envp[])
 		{
 			break;
 		}
-		livre = tokenize(lineptr);
 		lineptr[strlen(lineptr) - 1] = '\0';
 		if (strcmp(lineptr, "env") == 0)
 		{
@@ -40,8 +42,15 @@ void shell(char *envp[])
 			write(1, "\n", 1);
 			break;
 		}
+		livre = tokenize(lineptr);
 		execute_input(livre);
+		for (i = 0; livre[i] != NULL; i++)
+		{
+			free(livre[i]);
+		}
 		free(livre);
+
 	}
 	free(lineptr);
+	return (0);
 }

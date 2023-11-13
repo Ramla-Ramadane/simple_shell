@@ -12,7 +12,6 @@
 #define FAILURE 1
 #define BUFFER_SIZE 1024
 
-void shell(char *envp[]);
 void print_environment(char *envp[]);
 char **tokenize(const char *str);
 void execute_input(char **input);
