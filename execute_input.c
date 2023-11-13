@@ -15,7 +15,7 @@ void execute_input(char **input)
 	}
 
 	child_pid = fork();
-	
+
 	if (child_pid < 0)
 	{
 		perror("The creation of child process was unsuccessful");
@@ -23,11 +23,11 @@ void execute_input(char **input)
 	}
 	if (child_pid == 0)
 	{
-			if (execve(input[0], input, NULL) == -1)
-			{
-				perror("Failed to execute");
-				exit(FAILURE);
-			}
+		if (execve(input[0], input, NULL) == -1)
+		{
+			perror("Failed to execute");
+			exit(FAILURE);
+		}
 	}
 	else
 	{
