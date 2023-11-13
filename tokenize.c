@@ -20,9 +20,9 @@ char **tokenize(const char *str)
 	}
 	for (; token != NULL; i++)
 	{
-		hold_array[i] = token;
+		hold_array[i] = strdup(token);
 		token = strtok(NULL, " ");
 	}
 	hold_array[i] = NULL;
-	return (hold_array)
+	return (hold_array);
 }
