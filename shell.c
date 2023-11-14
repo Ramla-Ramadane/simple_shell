@@ -10,23 +10,19 @@
 int main(int argc __attribute__ ((unused)),
 	       char *argv[] __attribute__ ((unused)), char *envp[])
 {
-	int shell_mode, i;
-	ssize_t full_line;
+	int i;
 	char *my_prompt = "techgirls$ ";
 	char *lineptr = NULL;
 	size_t size = 0;
 	char **livre;
 
-	shell_mode = isatty(STDIN_FILENO);
-
 	while (1)
 	{
-		if (shell_mode)
+		if (isatty(STDIN_FILENO))
 		{
 			write(1, my_prompt, strlen(my_prompt));
 		}
-		full_line = getline(&lineptr, &size, stdin);
-		if (full_line == -1)
+		if (getline(&lineptr, &size, stdin) == -1)
 		{
 			break;
 		}
@@ -49,7 +45,6 @@ int main(int argc __attribute__ ((unused)),
 			free(livre[i]);
 		}
 		free(livre);
-
 	}
 	free(lineptr);
 	return (0);
