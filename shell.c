@@ -22,6 +22,7 @@ int main(int argc __attribute__ ((unused)),
 		}
 		if (getline(&lineptr, &size, stdin) == -1)
 		{
+			write(1, "\n", 1);
 			break;
 		}
 		lineptr[strlen(lineptr) - 1] = '\0';
