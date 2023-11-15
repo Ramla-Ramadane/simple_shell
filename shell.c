@@ -10,9 +10,7 @@
 int main(int argc __attribute__ ((unused)),
 	       char *argv[] __attribute__ ((unused)), char *envp[])
 {
-	int i;
-	char *my_prompt = "techgirls$ ";
-	char *lineptr = NULL;
+	char *my_prompt = "techgirls$ ", *lineptr = NULL;
 	size_t size = 0;
 	char **livre;
 
@@ -34,17 +32,12 @@ int main(int argc __attribute__ ((unused)),
 		}
 		if (strcmp(lineptr, "exit") == 0)
 		{
-			write(1, "Disconnected...", strlen("Disconnected..."));
 			write(1, "\n", 1);
 			break;
 		}
-		livre = tokenize(lineptr);
+		livre = tokenize(lineptr, " \n \t");
 		execute_input(livre);
-		for (i = 0; livre[i] != NULL; i++)
-		{
-			free(livre[i]);
-		}
-		free(livre);
+		free_memory(livre);
 	}
 	free(lineptr);
 	return (0);

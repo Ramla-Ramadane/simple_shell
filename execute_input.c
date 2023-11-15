@@ -7,30 +7,21 @@
  */
 void execute_input(char **input)
 {
-	pid_t child_pid;
-
 	if (input[0] == NULL)
 	{
 		return;
 	}
 
-	child_pid = fork();
-
-	if (child_pid < 0)
+	switch (fork())
 	{
-		perror("The creation of child process was unsuccessful");
-		exit(FAILURE);
-	}
-	if (child_pid == 0)
-	{
-		if (execve(input[0], input, NULL) == -1)
-		{
+		case -1:
+			perror("The creation of child process was unsuccessful");
+			break;
+		case 0:
+			execve(input[0], input, NULL);
 			perror("Failed to execute");
 			exit(FAILURE);
-		}
-	}
-	else
-	{
-		wait(NULL);
+		default:
+			wait(NULL);
 	}
 }
